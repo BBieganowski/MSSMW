@@ -6,7 +6,7 @@ import pandas as pd
 import os
 
 
-// some data cleaning first
+# data cleaning
 
 SP500 = pd.read_csv("/home/bartek/Desktop/MSSMW/data/S&P500.csv")
 DJIA = pd.read_csv("/home/bartek/Desktop/MSSMW/data/DJIA.csv")
