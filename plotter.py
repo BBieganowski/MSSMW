@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import fetch
 from matplotlib.ticker import PercentFormatter
 
-def plot_last_week():
+def plot_last_week(test = False):
     SP500, DJIA, NASDAQ, EURUSD, OIL, GOLD = fetch.get_lw_data()
 
     days = ["PW Close", "Monday", "Tuesday", "Wednesday","Thursday", "Friday"]
@@ -31,9 +31,10 @@ def plot_last_week():
 
 
     plt.legend()
-    plt.show()
+    if test == False:
+        plt.show()
 
-def plot_historical_week(week):
+def plot_historical_week(week, test = False):
     dataset = pd.read_csv("/home/bartek/Desktop/MSSMW/data/complete_dataset.csv")
     SP500 = [0]
     DJIA = [0]
@@ -74,5 +75,7 @@ def plot_historical_week(week):
 
 
     plt.legend()
-    plt.show()
+    
+    if test == False:
+        plt.show()
         
