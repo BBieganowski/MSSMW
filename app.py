@@ -2,83 +2,68 @@ import dash
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
+
 import fetch
 import plotly.express as px
 
+import components.styles as styles
+import components.charts as chrt
+import components.headlines as headlines
+import components.headline_field as hf
+
 external_stylesheets = [dbc.themes.BOOTSTRAP]
 
-colors = {
-    'background': 'black',
-    'text': 'white'
-}
-
-# Initialise the app
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # fetch data
-SP500, DJIA, NASDAQ, EURUSD, OIL, GOLD = fetch.get_lw_data()
+mssmw_date, lw_enddate, SP500, DJIA, NASDAQ, EURUSD, OIL, GOLD = fetch.get_MSSMW()
 
-fig_SP500   = px.line(SP500[1:], title="SP500", x=['Monday', 'Tuesday', 'Wednesday','Thursday','Friday'], y = 'Adj Close')
-fig_DJIA    = px.line(DJIA[1:], title="DJIA", x=['Monday', 'Tuesday', 'Wednesday','Thursday','Friday'], y = 'Adj Close')
-fig_NASDAQ  = px.line(NASDAQ[1:], title="NASDAQ", x=['Monday', 'Tuesday', 'Wednesday','Thursday','Friday'], y = 'Adj Close')
-fig_EURUSD  = px.line(EURUSD[1:], title="EURUSD", x=['Monday', 'Tuesday', 'Wednesday','Thursday','Friday'], y = 'Adj Close')
-fig_OIL     = px.line(OIL[1:], title="OIL", x=['Monday', 'Tuesday', 'Wednesday','Thursday','Friday'], y = 'Adj Close')
-fig_GOLD    = px.line(GOLD[1:], title="GOLD", x=['Monday', 'Tuesday', 'Wednesday','Thursday','Friday'], y = 'Adj Close')
+mssmw_date = str(mssmw_date.iloc[0])[:10]
+lw_enddate = str(lw_enddate)[:10]
 
-fig_SP500.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text']
-)
+fig_SP500   = chrt.comparative_main(SP500, "Standard and Poor's 500", draw_label = True)
+fig_DJIA    = chrt.comparative_main(DJIA, "Dow Jones Industrial Average")
+fig_NASDAQ  = chrt.comparative_main(NASDAQ, "NASDAQ Composite Index")
+fig_EURUSD  = chrt.comparative_main(EURUSD, "EUR/USD")
+fig_OIL     = chrt.comparative_main(OIL, "Crude Oil Spot Price")
+fig_GOLD    = chrt.comparative_main(GOLD, "Gold Spot Price")
 
-fig_DJIA.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text']
-)
-
-fig_NASDAQ.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text']
-)
-
-fig_EURUSD.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text']
-)
-
-fig_OIL.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text']
-)
-
-fig_GOLD.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text']
-)
-
-
-navbar1 = html.Div(
-    [
-        dbc.Row(dbc.Col(html.H1("LOGO WILL BE HERE", style = {'color':colors['text'], 'marginTop':50}))),
-        dbc.Row([dbc.Col(dbc.Button('Dashboard', block = True), style = {'marginLeft':10}), dbc.Col(dbc.Button('Methodology', block = True)), dbc.Col(dbc.Button('Gamma Market Technologies', block = True), style = {'marginRight':10})]),
-    ], style={'textAlign':'center', 'marginTop': 50, 'backgroundColor':colors['background']}
-)
+#fetch headlines
+hist_headline_base = headlines.get_headlines(mssmw_date)
 
 # Define the app
-app.layout = html.Div(style = {'backgroundColor': colors['background'], 'marginTop': -50},
-
-
+app.layout = html.Div(style = {'backgroundColor': styles.colors['background'], 'marginTop': -50},
 
 children=[
 
-  navbar1, 
+  html.Div([dbc.Row([dbc.Col([html.Img(src=app.get_asset_url('mssmw.png'), height=150, style = {'margin':20})]),
+    dbc.Col(),
+    dbc.Col(html.P('dashboard', style = styles.navbar_sections)),
+    dbc.Col(html.P('methodology', style = styles.navbar_sections)),
+    dbc.Col(html.P('about gmt', style = styles.navbar_sections)),
+    dbc.Col(),
+    dbc.Col()])],
+    style = {'marginTop':50, 'backgroundColor':styles.colors['navbar']}),
 
-  dcc.Graph(
+  dbc.Row([dbc.Col([html.P('The week ended '+ lw_enddate +' is most similar to the week ended '+ mssmw_date + '.', style = styles.similarity_text)])], style = styles.headliner_center), # this row specifies which week was the last one most similar to
+
+  dbc.Row([ # this will be the main row with headline columns and graph column
+    
+    dbc.Col([hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base),
+              hf.headline_field(hist_headline_base)], style = styles.content_field_left), #historical headlines?
+    
+    dbc.Col([dcc.Graph(
     id = 'SP500',
     figure = fig_SP500
   ),
@@ -106,8 +91,11 @@ children=[
   dcc.Graph(
     id = 'GOLD',
     figure = fig_GOLD
-  )
+  )], style= styles.content_field_center, width=6), #graphs
+    dbc.Col(html.P('modern headlines will be here!', style={'text-align':'center'}), style = styles.content_field_right)  #modern headlines
+  ]), 
 
+  
   ]
   )
 
