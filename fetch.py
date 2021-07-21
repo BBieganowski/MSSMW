@@ -93,7 +93,7 @@ def get_MSSMW():
     packed = pack_week(SP500_lw, DJIA_lw, NASDAQ_lw, EURUSD_lw, OIL_lw, GOLD_lw)
     model = load('NN.joblib')
     dist, indices = model.kneighbors([packed])
-    datapoint = pd.read_csv("/home/bartek/Desktop/MSSMW/data/complete_dataset.csv").loc[indices[0]]
+    datapoint = pd.read_csv("data/complete_dataset.csv").loc[indices[0]]
     date = datapoint['Week_started']
 
     sp500_his    = [datapoint.iloc[0, 2], datapoint.iloc[0, 8], datapoint.iloc[0, 14], datapoint.iloc[0, 20], datapoint.iloc[0, 26]]
