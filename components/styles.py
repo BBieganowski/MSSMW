@@ -61,29 +61,37 @@ headliner_center = {
 headline = {
     'font-family':'ubuntu', 
     'color':colors['text'], 
-    'fontSize':30, 
+    'fontSize':30,
+    'background': '#00000000',
+    'border-style':'solid',
+  'border-color':'#00000000',
     'text-align':'left',
-    'marginTop': 40,
-    'marginBottom': 15,
-    'marginLeft': 30,
-    'marginRight': 30
+    'margin-top':30
 }
 
 headline_subscript = {
     'font-family':'ubuntu', 
     'color':colors['text'], 
-    'fontSize':20, 
-    'text-align':'left',
-    'marginBottom': 30,
-    'marginLeft': 30,
-    'marginRight': 30
+    'fontSize':20,
+    'background': '#00000000',
+    'border-style':'solid',
+  'border-color':'#00000000',
+    'margin-top':-20,
+    'text-align':'left'
 }
 
 headline_content_field = {
   'border-radius': 25,
-  'background': '#000000',
-  'marginTop': 20,
-  'marginBottom': 20,
-  'marginLeft': 20,
-  'marginRight': 20
+  'background': '#00000000',
+  'border-style':'solid',
+  'border-color':'#00000000',
+  'height':200,
+  'margin-left':20,
+  'margin-right':20,
+  'margin-top':80
+  
+}
+
+transition = {
+  "transition": "opacity 250ms linear"
 }

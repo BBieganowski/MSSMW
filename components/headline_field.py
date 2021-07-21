@@ -5,14 +5,19 @@ import dash_core_components as dcc
 import components.styles as styles
 import components.headlines as headlines
 
-base1 = headlines.get_headlines('2016-03-12')
-
-def headline_field(base):
+def headline_field(base, headline_id = '', fader_id = '', headline_only = False):
     base = base[base['words_in_headline'] > 7]
     sample = base.sample(1)
 
-    headline_text = sample['headline'].iloc[0].replace('’S', '’s')
+    headline_text = sample['headline'].iloc[0].replace('’S', '’s').replace('\'S', '\'s')
+    headline_obj = html.P(headline_text, style = styles.headline)
+    field = dbc.Row([headline_obj,
+                     html.P("New York Times - " + str(sample['date'].iloc[0])[:10], style = styles.headline_subscript)], id=headline_id, style=styles.headline_content_field)
 
-    field = dbc.Row([html.P(headline_text, style = styles.headline),
-                     html.P("New York Times - " + str(sample['date'].iloc[0])[:10], style = styles.headline_subscript)])
-    return field
+    fade = dbc.Fade(field, id = fader_id, is_in=True, appear = False, style=styles.transition, timeout=250)
+    if headline_only:
+        return field.children
+    else:
+        return fade
+
+
