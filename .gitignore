@@ -1,3 +1,4 @@
-data/
+data/headlines/*
+!data/headlines/FINAL_0_1.csv
 Playground.ipynb
 legacy/
