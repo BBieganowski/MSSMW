@@ -4,11 +4,9 @@ colors = {
     'text': 'white'
 }
 
-navbar_sections = {
-    'font-family':'ubuntu', 
-    'color':colors['text'], 
-    'fontSize':30, 
-    'marginTop':70
+navbar = {
+  'background': '#2c2c2c',
+  'height':200
 }
 
 similarity_text = {
@@ -85,10 +83,10 @@ headline_content_field = {
   'background': '#00000000',
   'border-style':'solid',
   'border-color':'#00000000',
-  'height':200,
+  #'height':200,
   'margin-left':20,
   'margin-right':20,
-  'margin-top':80
+  'margin-top':40
   
 }
 
