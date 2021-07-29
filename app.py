@@ -6,7 +6,6 @@ from dash.dependencies import Input, Output, State
 import numpy as np
 import time
 from datetime import datetime
-from memory_profiler import profile
 
 import fetch
 from components import styles
