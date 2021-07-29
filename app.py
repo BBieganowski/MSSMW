@@ -41,15 +41,15 @@ modern_headline_base = headlines.get_modern_headlines()
 
 
 # Define the app
-app.layout = html.Div(style = {'backgroundColor': styles.colors['background'], 'marginTop': -50},
+app.layout = html.Div(style = {'backgroundColor': styles.colors['background'], 'marginTop': -50, 'marginLeft':-20},
 
 children=[
 
   dbc.Row([dbc.Col(), html.Img(src=app.get_asset_url('logo1.png'), style = {'height':150, 'justify':'center', 'marginTop':50}), dbc.Col()], style = styles.navbar),
 
-  dbc.Row([dbc.Col([html.P('Historical Headlines', style = styles.similarity_text)], style = styles.content_field_left, xs=2, sm=2, md=2, lg = 2, xl = 2),
-           dbc.Col([html.P('The week ended ' + LW_ENDDATE + ' is the most similar to the week ended '+ MSSMW_DATE + '.', style = styles.similarity_text)], style = styles.content_field_center, xs=6, sm=6, md=6, lg = 6, xl = 6, width = 6),
-           dbc.Col([html.P('Modern Headlines', style = styles.similarity_text)],style = styles.content_field_right, xs=2, sm=2, md=2, lg = 2, xl = 2)]),
+  dbc.Row([dbc.Col([html.P('Historical Headlines', style = styles.similarity_text)], style = styles.content_field_left),
+           dbc.Col([html.P('The week ended ' + LW_ENDDATE + ' is the most similar to the week ended '+ MSSMW_DATE + '.', style = styles.similarity_text)], style = styles.content_field_center, xs = 6, sm = 6, md = 6, lg = 6, xl = 6),
+           dbc.Col([html.P('Modern Headlines', style = styles.similarity_text)],style = styles.content_field_right)]),
   dbc.Row([ # this will be the main row with headline columns and graph column
 
     dbc.Col([hf.headline_field(hist_headline_base, 'headline_1', 'fader_1'), 
@@ -69,7 +69,7 @@ children=[
                            n_intervals=0),
              dcc.Interval(id = 'interval-component-2',
                            interval=2*1000,
-                           n_intervals=0)], style = styles.content_field_left, xs=2, sm=2, md=2, lg = 2, xl = 2),
+                           n_intervals=0)], style = styles.content_field_left),
               
     dbc.Col([dcc.Graph(
     id = 'SP500',
@@ -123,7 +123,7 @@ children=[
     'displayModeBar': False,
     'displaylogo': False,                                       
   }
-  )], style= styles.content_field_center, width=6, xs=6, sm=6, md=6, lg = 6, xl = 6), #graphs
+  )], style= styles.content_field_center, xs=6, sm=6, md=6, lg = 6, xl = 6), #graphs
     
     dbc.Col([hf.modern_headline_field(modern_headline_base,'modern-headline-1', 'modern-fader-1'),
              hf.modern_headline_field(modern_headline_base,'modern-headline-2', 'modern-fader-2'),
@@ -135,7 +135,7 @@ children=[
              hf.modern_headline_field(modern_headline_base,'modern-headline-8', 'modern-fader-8'),
              hf.modern_headline_field(modern_headline_base,'modern-headline-9', 'modern-fader-9'),
              hf.modern_headline_field(modern_headline_base,'modern-headline-10', 'modern-fader-10'),
-             hf.modern_headline_field(modern_headline_base,'modern-headline-11', 'modern-fader-11')], style = styles.content_field_right,  xs=2, sm=2, md=2, lg = 2, xl = 2)
+             hf.modern_headline_field(modern_headline_base,'modern-headline-11', 'modern-fader-11')], style = styles.content_field_right)
 
 
   ]),

@@ -26,7 +26,7 @@ content_field_right = {
   'marginTop': 20,
   'marginBottom': 20,
   'marginLeft': 20,
-  'marginRight': 40
+  'marginRight': 20
 }
 
 
@@ -35,7 +35,7 @@ content_field_left = {
   'background': '#2c2c2c',
   'marginTop': 20,
   'marginBottom': 20,
-  'marginLeft': 40,
+  'marginLeft': 30,
   'marginRight': 20
 }
 
