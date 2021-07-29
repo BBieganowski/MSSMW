@@ -3,7 +3,7 @@ import components.styles as styles
 
 def comparative_main(asset_object, title, draw_label = False):
     x = ['Monday', 'Tuesday', 'Wednesday','Thursday','Friday']
-    figure = px.line(asset_object, title=title, x=x, y = ['Last Week','Historical Week'], line_shape = 'spline')
+    figure = px.line(asset_object, title=title, x=x, y = ['Last Week','Historical Week'], line_shape = 'spline', height=400)
     figure.layout.yaxis.tickformat = ',.2%'
     amplitude = (asset_object.max().max() - asset_object.min().min())
 
@@ -27,11 +27,12 @@ def comparative_main(asset_object, title, draw_label = False):
         figure.update_layout(showlegend = False)
 
     figure.update_layout(
+    title=dict(yanchor = 'top', y = 0.85),
     plot_bgcolor=styles.content_field_center['background'],
     paper_bgcolor=styles.content_field_center['background'],
     font_color=styles.colors['text'],    
     font_family = 'ubuntu',
-    font_size = 16
+    font_size = 10
     )
 
     return figure

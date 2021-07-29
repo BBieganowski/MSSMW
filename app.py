@@ -16,7 +16,7 @@ from components import headline_field as hf
 
 external_stylesheets = [dbc.themes.BOOTSTRAP]
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets, update_title=None)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, update_title=None, meta_tags=[{'name':'viewport', 'content': 'width=device-width, initial-scale=0.3, maximum-scale=0.3, minimum-scale=0.1'}])
 server = app.server
 app.title = 'MSSMW'
 
@@ -45,7 +45,7 @@ app.layout = html.Div(style = {'backgroundColor': styles.colors['background'], '
 
 children=[
 
-  dbc.Row([dbc.Col(), html.Img(src=app.get_asset_url('logo1.png'), style = {'height':300, 'justify':'center', 'marginTop':30}), dbc.Col()], style = styles.navbar),
+  dbc.Row([dbc.Col(), html.Img(src=app.get_asset_url('logo1.png'), style = {'height':150, 'justify':'center', 'marginTop':50}), dbc.Col()], style = styles.navbar),
 
   dbc.Row([dbc.Col([html.P('Historical Headlines', style = styles.similarity_text)], style = styles.content_field_left),
            dbc.Col([html.P('The week ended ' + LW_ENDDATE + ' is the most similar to the week ended '+ MSSMW_DATE + '.', style = styles.similarity_text)], style = styles.content_field_center, width = 6),

@@ -6,14 +6,14 @@ colors = {
 
 navbar = {
   'background': '#2c2c2c',
-  'height':300,
+  'height':175,
   'text-align':'center'
 }
 
 similarity_text = {
     'font-family':'ubuntu', 
     'color':colors['text'], 
-    'fontSize':30, 
+    'fontSize':20, 
     'text-align':'center',
     'marginTop': 10,
     'marginBottom': 10
@@ -60,7 +60,7 @@ headliner_center = {
 headline = {
     'font-family':'ubuntu', 
     'color':colors['text'], 
-    'fontSize':30,
+    'fontSize':16,
     'background': '#00000000',
     'border-style':'solid',
   'border-color':'#00000000',
@@ -71,7 +71,7 @@ headline = {
 headline_subscript = {
     'font-family':'ubuntu', 
     'color':colors['text'], 
-    'fontSize':20,
+    'fontSize':12,
     'background': '#00000000',
     'border-style':'solid',
   'border-color':'#00000000',
@@ -87,7 +87,7 @@ headline_content_field = {
   #'height':200,
   'margin-left':20,
   'margin-right':20,
-  'margin-top':40
+  'margin-top':20
   
 }
 
