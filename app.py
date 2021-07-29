@@ -16,7 +16,7 @@ from components import headline_field as hf
 
 external_stylesheets = [dbc.themes.BOOTSTRAP]
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets, update_title=None, meta_tags=[{'name':'viewport', 'content': 'width=device-width, initial-scale=0.3, maximum-scale=0.3, minimum-scale=0.1'}])
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, update_title=None, meta_tags=[{'name':'viewport', 'content': 'width=device-width, initial-scale=0.1, maximum-scale=0.1, minimum-scale=0.1'}])
 server = app.server
 app.title = 'MSSMW'
 
