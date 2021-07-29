@@ -6,6 +6,7 @@ from dash.dependencies import Input, Output, State
 import numpy as np
 import time
 from datetime import datetime
+from memory_profiler import profile
 
 import fetch
 from components import styles
@@ -16,8 +17,9 @@ from components import headline_field as hf
 
 external_stylesheets = [dbc.themes.BOOTSTRAP]
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, update_title=None)
 server = app.server
+app.title = 'MSSMW'
 
 # fetch data
 MSSMW_DATE, LW_ENDDATE, SP500, DJIA, NASDAQ, EURUSD, OIL, GOLD = fetch.get_MSSMW()
@@ -32,6 +34,8 @@ fig_EURUSD  = chrt.comparative_main(EURUSD, "EUR/USD")
 fig_OIL     = chrt.comparative_main(OIL, "Crude Oil Spot Price")
 fig_GOLD    = chrt.comparative_main(GOLD, "Gold Spot Price")
 
+
+
 #fetch headlines and create used/unused databases
 hist_headline_base = headlines.get_headlines(MSSMW_DATE)
 modern_headline_base = headlines.get_modern_headlines()
@@ -42,16 +46,11 @@ app.layout = html.Div(style = {'backgroundColor': styles.colors['background'], '
 
 children=[
 
-  dbc.Row(html.P("navbar"), style = styles.navbar),
+  dbc.Row([dbc.Col(), html.Img(src=app.get_asset_url('logo1.png'), style = {'height':300, 'justify':'center', 'marginTop':30}), dbc.Col()], style = styles.navbar),
 
-  dbc.Row([
-      dbc.Col([
-        html.P('The week ended ' +
-              LW_ENDDATE +
-              ' is most similar to the week ended '+
-              MSSMW_DATE + '.', style = styles.similarity_text)
-              ])
-              ], style = styles.headliner_center),
+  dbc.Row([dbc.Col([html.P('Historical Headlines', style = styles.similarity_text)], style = styles.content_field_left),
+           dbc.Col([html.P('The week ended ' + LW_ENDDATE + ' is the most similar to the week ended '+ MSSMW_DATE + '.', style = styles.similarity_text)], style = styles.content_field_center, width = 6),
+           dbc.Col([html.P('Modern Headlines', style = styles.similarity_text)],style = styles.content_field_right)]),
   dbc.Row([ # this will be the main row with headline columns and graph column
 
     dbc.Col([hf.headline_field(hist_headline_base, 'headline_1', 'fader_1'), 

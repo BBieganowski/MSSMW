@@ -29,7 +29,9 @@ def comparative_main(asset_object, title, draw_label = False):
     figure.update_layout(
     plot_bgcolor=styles.content_field_center['background'],
     paper_bgcolor=styles.content_field_center['background'],
-    font_color=styles.colors['text']    
+    font_color=styles.colors['text'],    
+    font_family = 'ubuntu',
+    font_size = 16
     )
 
     return figure

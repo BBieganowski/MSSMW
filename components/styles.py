@@ -6,7 +6,8 @@ colors = {
 
 navbar = {
   'background': '#2c2c2c',
-  'height':200
+  'height':300,
+  'text-align':'center'
 }
 
 similarity_text = {
